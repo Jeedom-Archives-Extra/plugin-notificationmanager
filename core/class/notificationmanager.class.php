@@ -75,6 +75,26 @@ class notificationmanagerCmd extends cmd {
 			return;
 		}
 		$eqLogic = $this->getEqLogic();
+		$notifier = null;
+		foreach ($this->getConfiguration('notifiers') as $key => $value) {
+			if ($this->getName() == $value['name']) {
+				$notifier = $value;
+			}
+		}
+		foreach ($notifier['cmd'] as $cmd) {
+			if ($cmd['enable'] != 1) {
+				continue;
+			}
+			try {
+				$cmd_find = cmd::byId(str_replace('#', '', $cmd['cmd']));
+				if (is_object($cmd_find)) {
+					$cmd_find->execCmd($_options);
+					break;
+				}
+			} catch (Exception $e) {
+
+			}
+		}
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
