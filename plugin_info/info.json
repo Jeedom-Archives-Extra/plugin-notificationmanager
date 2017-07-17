@@ -1,0 +1,10 @@
+{
+	"id" : "notificationmanager",
+	"name" : "Notification Manager",
+	"description" : "Plugin permettant gerer les notifications",
+	"licence" : "AGPL",
+	"author" : "Loïc",
+	"require" : "3.0",
+	"category" : "communication
+	"
+}

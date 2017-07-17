@@ -1,1 +1,1 @@
-# plugin-notificationmanager
+# plugin-denonavr
