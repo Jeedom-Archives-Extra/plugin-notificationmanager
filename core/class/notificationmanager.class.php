@@ -27,7 +27,33 @@ class notificationmanager extends eqLogic {
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function postSave() {
-
+		$existing_notifier = array();
+		if (is_array($this->getConfiguration('notifiers'))) {
+			foreach ($this->getConfiguration('notifiers') as $key => $value) {
+				$existing_notifier[] = $value['name'];
+				$cmd = null;
+				foreach ($this->getCmd() as $cmd_list) {
+					if ($cmd_list->getName() == $value['name']) {
+						$cmd = $cmd_list;
+						break;
+					}
+				}
+				if ($cmd == null) {
+					$cmd = new notificationmanagerCmd();
+				}
+				$cmd->setName($value['name']);
+				$cmd->setEqLogic_id($this->getId());
+				$cmd->setType('action');
+				$cmd->setSubType('message');
+				$cmd->setLogicalId('notifier');
+				$cmd->save();
+			}
+		}
+		foreach ($this->getCmd() as $cmd) {
+			if ($cmd->getType() == 'action' && !in_array($cmd->getName(), $existing_notifier) && $cmd->getLogicalId() == 'notifier') {
+				$cmd->remove();
+			}
+		}
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
@@ -40,8 +66,15 @@ class notificationmanagerCmd extends cmd {
 
 	/*     * *********************Methode d'instance************************* */
 
-	public function execute($_options = array()) {
+	public function dontRemoveCmd() {
+		return true;
+	}
 
+	public function execute($_options = array()) {
+		if ($this->getType() == 'info') {
+			return;
+		}
+		$eqLogic = $this->getEqLogic();
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
