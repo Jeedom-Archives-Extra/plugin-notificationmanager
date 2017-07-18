@@ -52,7 +52,7 @@
  $("body").delegate(".listCmdMessage", 'click', function () {
     var el = $(this).closest('.notifier').find('.notifierCmdAttr[data-l1key=cmd]');
     jeedom.cmd.getSelectModal({cmd: {type: 'action',subType : 'message'}}, function (result) {
-        el.value(result.human);
+        el.atCaret('insert',result.human);
     });
 });
 

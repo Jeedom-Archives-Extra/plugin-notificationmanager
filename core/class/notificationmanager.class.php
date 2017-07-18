@@ -87,14 +87,23 @@ class notificationmanagerCmd extends cmd {
 			if ($cmd['enable'] != 1) {
 				continue;
 			}
-			try {
-				$cmd_find = cmd::byId(str_replace('#', '', $cmd['cmd']));
-				if (is_object($cmd_find)) {
-					$cmd_find->execCmd($_options);
-					break;
-				}
-			} catch (Exception $e) {
+			$ok = false;
 
+			$cmds = explode('&&', $cmd['cmd']);
+			foreach ($cmds as $cmd_id) {
+				try {
+					$cmd_find = cmd::byId(str_replace('#', '', $cmd_id));
+					if (is_object($cmd_find)) {
+						$cmd_find->execCmd($_options);
+						$ok = true;
+					}
+				} catch (Exception $e) {
+
+				}
+			}
+
+			if ($ok) {
+				break;
 			}
 		}
 	}
