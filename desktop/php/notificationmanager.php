@@ -59,10 +59,10 @@ foreach ($eqLogics as $eqLogic) {
     <form class="form-horizontal">
       <fieldset>
         <div class="form-group">
-          <label class="col-sm-3 control-label">{{Nom de l'équipement denon}}</label>
+          <label class="col-sm-3 control-label">{{Nom de l'équipement notifier}}</label>
           <div class="col-sm-3">
             <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-            <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement denon}}"/>
+            <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement notifier}}"/>
           </div>
         </div>
         <div class="form-group">
@@ -91,7 +91,7 @@ foreach (object::all() as $object) {
 </div>
 <div role="tabpanel" class="tab-pane" id="commandtab">
   <br/>
-  <a class="btn btn-default pull-right" id="bt_addNotifier">{{Ajouter une commande de notification}}</a>
+  <a class="btn btn-default pull-right" id="bt_addNotifier"><i class="fa fa-envelope-o"></i> {{Ajouter une commande de notification}}</a>
   <br/><br/>
   <div id="div_notifiers"></div>
 </div>

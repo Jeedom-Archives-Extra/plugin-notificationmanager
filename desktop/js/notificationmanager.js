@@ -15,6 +15,8 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
+ $("#div_notifiers").sortable({axis: "y", cursor: "move", items: ".notifierCmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+
  $('#bt_addNotifier').on('click', function () {
     bootbox.prompt("{{Nom de la commande de notification ?}}", function (result) {
         if (result !== null && result != '') {

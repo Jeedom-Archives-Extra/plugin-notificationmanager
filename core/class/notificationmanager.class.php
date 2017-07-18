@@ -76,9 +76,11 @@ class notificationmanagerCmd extends cmd {
 		}
 		$eqLogic = $this->getEqLogic();
 		$notifier = null;
-		foreach ($this->getConfiguration('notifiers') as $key => $value) {
-			if ($this->getName() == $value['name']) {
-				$notifier = $value;
+		if (is_array($eqLogic->getConfiguration('notifiers'))) {
+			foreach ($eqLogic->getConfiguration('notifiers') as $key => $value) {
+				if ($this->getName() == $value['name']) {
+					$notifier = $value;
+				}
 			}
 		}
 		foreach ($notifier['cmd'] as $cmd) {
