@@ -88,7 +88,6 @@ class notificationmanagerCmd extends cmd {
 				continue;
 			}
 			$ok = false;
-
 			$cmds = explode('&&', $cmd['cmd']);
 			foreach ($cmds as $cmd_id) {
 				try {
@@ -98,12 +97,13 @@ class notificationmanagerCmd extends cmd {
 						$ok = true;
 					}
 				} catch (Exception $e) {
-
+					log::add('notificationmanager', 'info', __('Echec d\'envoi : ', __FILE__) . $e->getMessage());
 				}
 			}
-
 			if ($ok) {
 				break;
+			} else {
+				log::add('notificationmanager', 'info', __('Echec d\'envoi sur une commande, tentative sur la suivante : ', __FILE__) . $cmd['cmd']);
 			}
 		}
 	}
