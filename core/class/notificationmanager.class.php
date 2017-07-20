@@ -94,7 +94,10 @@ class notificationmanagerCmd extends cmd {
 					$cmd_find = cmd::byId(str_replace('#', '', $cmd_id));
 					if (is_object($cmd_find)) {
 						if (isset($_options['answer'])) {
-							$cmd_find->setCache('storeVariable', $this->getCache('storeVariable'));
+							$cmd_find->setCache(array(
+								'ask::variable' => $this->getCache('ask::variable'),
+								'ask::endtime' => $this->getCache('ask::endtime'),
+							));
 						}
 						$cmd_find->execCmd($_options);
 						$ok = true;
