@@ -74,6 +74,16 @@ class notificationmanagerCmd extends cmd {
 		if ($this->getType() == 'info') {
 			return;
 		}
+		if (strpos($_options['message'], '|') !== false && strpos($_options['message'], '[') !== false && strpos($_options['message'], ']') !== false) {
+			$replies = interactDef::generateTextVariant($_options['message']);
+			$random = rand(0, count($replies) - 1);
+			$_options['message'] = $replies[$random];
+		}
+		if (strpos($_options['title'], '|') !== false && strpos($_options['title'], '[') !== false && strpos($_options['title'], ']') !== false) {
+			$replies = interactDef::generateTextVariant($_options['title']);
+			$random = rand(0, count($replies) - 1);
+			$_options['title'] = $replies[$random];
+		}
 		$eqLogic = $this->getEqLogic();
 		$notifier = null;
 		if (is_array($eqLogic->getConfiguration('notifiers'))) {
