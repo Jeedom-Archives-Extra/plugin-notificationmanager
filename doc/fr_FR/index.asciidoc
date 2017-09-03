@@ -1,0 +1,9 @@
+= Mpower
+
+== Description
+
+Ce plugin permet de gerer les notifications (reprise en case d'erreur, generation de texte...)
+
+'''
+
+include::changelog.asciidoc[]
