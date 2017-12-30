@@ -127,4 +127,4 @@ class notificationmanagerCmd extends cmd {
 	/*     * **********************Getteur Setteur*************************** */
 }
 
-?>
+
